@@ -1,6 +1,6 @@
 import { Product, Promotion } from '@/types'
 
-  const API_BASE = 'https://tienda-virtual-insumos-production.up.railway.app/api'
+  const API_BASE = '/api'
 
   export const fetchProducts = async (): Promise<Product[]> => {
     const response = await fetch(`${API_BASE}/products`)
@@ -14,6 +14,7 @@ import { Product, Promotion } from '@/types'
     return response.json()
   }
 
+  // Para imágenes, usar directamente tu API externa
   export const getProductImageUrl = (productId: number): string => {
-    return `${API_BASE}/files/stream/producto/${productId}`
+    return `https://tienda-virtual-insumos-production.up.railway.app/api/files/stream/producto/${productId}`
   }

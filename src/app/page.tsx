@@ -1,103 +1,155 @@
-import Image from "next/image";
+'use client'
+  import ProductGrid from '@/components/ProductGrid'
+  import StoreLayout from '@/components/StoreLayout'
+  import { Sparkles, Shield, Clock, ShoppingCart, Package, MessageCircle, Star } from 'lucide-react'
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  export default function HomePage() {
+    return (
+      <StoreLayout>
+        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50" style={{backgroundImage:'linear-gradient(to bottom right, #fdf2f8, #ffffff, #f5e6ed)'}}>
+          {/* Hero Section */}
+          <section className="relative text-white overflow-hidden" style={{background: 'linear-gradient(to right,#EFBACC, #E8A4C5, #D68BB0)'}}>
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="absolute inset-0 opacity-20">
+              <div className="h-full w-full bg-white/5bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)]"></div>
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="relative container mx-auto px-4 py-16 md:py-24">
+              <div className="text-center max-w-4xl mx-auto">
+                <div className="flex items-center justify-center mb-6">
+                  <Sparkles className="h-8 w-8 mr-3 text-yellow-200" />
+                  <span className="text-sm font-medium px-4 py-2 bg-white/20 rounded-full backdrop-blur-sm">
+                    Productos Premium de Estética
+                  </span>
+                </div>
+
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+                  CSA Tienda Estetica
+                </h1>
+
+                <p className="text-lg md:text-xl mb-8 leading-relaxed text-white/90">
+                  Descubre nuestra selección exclusiva de productos y servicios de estética profesional.
+                  <br className="hidden md:block" />
+                  Desde tratamientos con Botox hasta servicios de depilación láser.
+                </p>
+
+                {/* Features */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                  <div className="text-center">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                      <Shield className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="font-semibold mb-2">Productos Originales</h3>
+                    <p className="text-sm text-white/80">Garantía de autenticidad</p>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 w-16 h-16 mx-auto mb-4 flexitems-center justify-center">
+                      <Clock className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="font-semibold mb-2">Entrega Rápida</h3>
+                    <p className="text-sm text-white/80">Contacto inmediato vía WhatsApp</p>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 w-16 h-16 mx-auto mb-4 flexitems-center justify-center">
+                      <Sparkles className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="font-semibold mb-2">Calidad Premium</h3>
+                    <p className="text-sm text-white/80">Los mejores productos del mercado</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Wave separator */}
+            <div className="absolute bottom-0 left-0 right-0">
+              <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M0,100 C240,0 480,0 720,50 C960,100 1200,100 1440,50 L1440,100 Z"
+                  fill="#F5E6ED"
+                />
+              </svg>
+            </div>
+          </section>
+
+          {/* Main content */}
+          <main className="container mx-auto px-4 py-12">
+            <ProductGrid />
+          </main>
+
+          {/* Footer mejorado */}
+          <footer className="text-black relative overflow-hidden" style={{background: 'linear-gradient(to bottomright, #D68BB0, #C67AA3, #B8699A)'}}>
+            {/* Patrón de fondo decorativo */}
+            <div className="absolute inset-0 bg-black/5"></div>
+            <div className="absolute inset-0 opacity-20">
+              <div className="h-full w-full bg-white/5bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent)]"></div>
+            </div>
+
+            {/* Wave separator superior */}
+            <div className="relative">
+              <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                <path d="M0,0 C240,100 480,100 720,50 C960,0 1200,0 1440,50 L1440,0 Z" fill="#F5E6ED"/>
+              </svg>
+            </div>
+
+            <div className="relative container mx-auto px-4 py-16">
+              <div className="text-center max-w-4xl mx-auto">
+                {/* Logo y título */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 mr-3">
+                      <ShoppingCart className="h-8 w-8 text-black" />
+                    </div>
+                    <h3 className="text-3xl font-bold">Tienda Virtual Estética</h3>
+                  </div>
+                  <p className="text-black/90 text-lg">Tu belleza es nuestra prioridad</p>
+                </div>
+
+                {/* Características destacadas */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                  <div className="text-center">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 w-16 h-16 mx-auto mb-4 flexitems-center justify-center">
+                      <Package className="h-8 w-8 text-black" />
+                    </div>
+                    <h4 className="font-semibold mb-2">Productos Originales</h4>
+                    <p className="text-sm text-black/80">Garantía de autenticidad en cada producto</p>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 w-16 h-16 mx-auto mb-4 flexitems-center justify-center">
+                      <MessageCircle className="h-8 w-8 text-black" />
+                    </div>
+                    <h4 className="font-semibold mb-2">Contacto WhatsApp</h4>
+                    <p className="text-sm text-black/80">Atención personalizada y rápida</p>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                      <Star className="h-8 w-8 text-black" />
+                    </div>
+                    <h4 className="font-semibold mb-2">Calidad Premium</h4>
+                    <p className="text-sm text-black/80">Los mejores tratamientos estéticos</p>
+                  </div>
+                </div>
+
+                {/* Separador decorativo */}
+                <div className="border-t border-white/20 pt-8">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-black/90">© 2025 CSA Tienda Estética. Todos los derechos reservados.</p>
+                    <div className="flex items-center gap-4 text-sm text-black/70">
+                      <span>Productos profesionales</span>
+                      <span>•</span>
+                      <span>Servicio de calidad</span>
+                      <span>•</span>
+                      <span>Contacto directo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+      </StoreLayout>
+    )
+  }

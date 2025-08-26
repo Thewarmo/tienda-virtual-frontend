@@ -1,0 +1,15 @@
+ User-agent: *
+  Allow: /
+
+  # Sitemap
+  Sitemap: https://tu-dominio.vercel.app/sitemap.xml
+
+  # Crawl-delay (opcional)
+  Crawl-delay: 1
+
+  # Optimización para bots específicos
+  User-agent: Googlebot
+  Allow: /
+
+  User-agent: Bingbot
+  Allow: /

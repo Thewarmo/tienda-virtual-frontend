@@ -3,7 +3,7 @@
   import { Product } from '@/types'
   import { fetchProducts } from '@/utils/api'
   import ProductCard from './ProductCard'
-  import { Loader2, AlertCircle, Package, Filter, Grid3X3, Sparkles } from 'lucide-react'
+  import { AlertCircle, Package, Filter, Grid3X3, Sparkles } from 'lucide-react'
 
   export default function ProductGrid() {
     const [products, setProducts] = useState<Product[]>([])

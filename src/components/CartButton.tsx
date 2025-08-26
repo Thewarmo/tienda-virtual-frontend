@@ -3,11 +3,9 @@
   import { useCartStore } from '@/hooks/useCartStore'
   import { ShoppingCart } from 'lucide-react'
 
-  interface CartButtonProps {
-    onOpenCheckout?: () => void
-  }
+  
 
-  export default function CartButton({ onOpenCheckout }: CartButtonProps) {
+  export default function CartButton() {
     const { openCart, getTotalItems, items } = useCartStore()
     const [itemCount, setItemCount] = useState(0)
     const [mounted, setMounted] = useState(false)

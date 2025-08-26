@@ -4,6 +4,7 @@
   import { useCartStore } from '@/hooks/useCartStore'
   import { getProductImageUrl } from '@/utils/api'
   import { ShoppingCart, Package, Wrench, Star, Heart } from 'lucide-react'
+  import Image from 'next/image'
   import toast from 'react-hot-toast'
 
   interface ProductCardProps {
@@ -48,12 +49,14 @@
         {/* Imagen del producto */}
         <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-200">
           {product.urlImagen || !imageError ? (
-            <img
-              src={getImageSrc()}
-              alt={product.nombre}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              onError={() => setImageError(true)}
-            />
+            <Image
+    src={getImageSrc()}
+    alt={product.nombre}
+    width={320}
+    height={224}
+    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    onError={() => setImageError(true)}
+  />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200
   to-gray-300">

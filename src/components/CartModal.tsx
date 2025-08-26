@@ -1,22 +1,31 @@
 'use client'
-  import { useState, useEffect } from 'react'
-  import { useCartStore } from '@/hooks/useCartStore'
-  import { getProductImageUrl } from '@/utils/api'
-  import { X, ShoppingCart, Minus, Plus, Trash2, Package, Wrench } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { useCartStore } from '@/hooks/useCartStore'
+import { getProductImageUrl } from '@/utils/api'
+import { X, ShoppingCart, Minus, Plus, Trash2, Package, Wrench } from 'lucide-react'
+import Image from 'next/image'
+import { Product } from '@/types'
 
   interface CartModalProps {
     onOpenCheckout?: () => void
   }
 
+   interface CartItemProps {
+    item: Product; // O mejor aún, usa el tipo correcto
+    updateQuantity: (productId: number, quantity: number) => void;
+    removeItem: (productId: number) => void;
+    formatPrice: (price: number) => string;
+  }
+
   // Componente separado para cada item del carrito
-  function CartItem({ item, updateQuantity, removeItem, formatPrice }: any) {
+  function CartItem({ item, updateQuantity, removeItem, formatPrice }: CartItemProps) {
     const [imageError, setImageError] = useState(false)
 
     const getImageSrc = () => {
-      if (item.product.urlImagen && !imageError) {
-        return item.product.urlImagen
+      if (item.urlImagen && !imageError) {
+        return item.urlImagen
       }
-      return getProductImageUrl(item.product.id)
+      return getProductImageUrl(item.id)
     }
 
     return (
@@ -24,10 +33,12 @@
   hover:shadow-lg transition-all duration-300">
         {/* Imagen del producto mejorada */}
         <div className="w-20 h-20 rounded-xl flex-shrink-0 overflow-hidden shadow-md">
-          {item.product.urlImagen || !imageError ? (
-            <img
+          {item.urlImagen || !imageError ? (
+             <Image
               src={getImageSrc()}
-              alt={item.product.nombre}
+              alt={item.nombre}
+              width={80}
+              height={80}
               className="w-full h-full object-cover"
               onError={() => setImageError(true)}
             />
@@ -36,7 +47,7 @@
               className="w-full h-full flex items-center justify-center"
               style={{background: 'linear-gradient(135deg, #F5E6ED, #EFBACC)'}}
             >
-              {item.product.tipoItem === 'PRODUCTO' ? (
+              {item.tipoItem === 'PRODUCTO' ? (
                 <Package className="h-8 w-8 text-gray-400" />
               ) : (
                 <Wrench className="h-8 w-8 text-gray-400" />
@@ -49,10 +60,10 @@
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start mb-2">
             <h3 className="font-semibold text-sm line-clamp-2 text-gray-800">
-              {item.product.nombre}
+              {item.nombre}
             </h3>
             <button
-              onClick={() => removeItem(item.product.id)}
+              onClick={() => removeItem(item.id)}
               className="p-1.5 hover:bg-red-100 text-red-500 rounded-lg transition-colors ml-2"
             >
               <Trash2 className="h-4 w-4" />
@@ -62,19 +73,19 @@
           <div className="flex items-center gap-2 mb-3">
             <span
               className="text-xs px-2 py-1 rounded-full font-medium text-white"
-              style={{background: item.product.tipoItem === 'PRODUCTO' ? '#D68BB0' : '#EFBACC'}}
+              style={{background: item.tipoItem === 'PRODUCTO' ? '#D68BB0' : '#EFBACC'}}
             >
-              {item.product.tipoItem}
+              {item.tipoItem}
             </span>
             <span className="text-xs text-gray-500">•</span>
-            <span className="text-xs text-gray-500">{item.product.codigo}</span>
+            <span className="text-xs text-gray-500">{item.codigo}</span>
           </div>
 
           {/* Controles de cantidad */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button
-                onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                onClick={() => updateQuantity(item.id, item.stock - 1)}
                 className="p-1.5 rounded-lg transition-colors hover:scale-105"
                 style={{background: 'linear-gradient(135deg, #F5E6ED, #EFBACC)'}}
               >
@@ -82,11 +93,11 @@
               </button>
 
               <span className="text-sm font-bold min-w-[2rem] text-center bg-white px-3 py-1 rounded-lg shadow-sm">
-                {item.quantity}
+                {item.stock}
               </span>
 
               <button
-                onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                onClick={() => updateQuantity(item.id, item.stock + 1)}
                 className="p-1.5 rounded-lg transition-colors hover:scale-105"
                 style={{background: 'linear-gradient(135deg, #F5E6ED, #EFBACC)'}}
               >
@@ -96,10 +107,10 @@
 
             <div className="text-right">
               <div className="text-xs text-gray-500">
-                {formatPrice(item.product.precio)} c/u
+                {formatPrice(item.precio)} c/u
               </div>
               <div className="font-bold text-sm" style={{color: '#D68BB0'}}>
-                {formatPrice(item.product.precio * item.quantity)}
+                {formatPrice(item.precio * item.stock)}
               </div>
             </div>
           </div>
@@ -198,7 +209,7 @@
                 {items.map((item) => (
                   <CartItem
                     key={item.product.id}
-                    item={item}
+                    item={item.product}
                     updateQuantity={updateQuantity}
                     removeItem={removeItem}
                     formatPrice={formatPrice}

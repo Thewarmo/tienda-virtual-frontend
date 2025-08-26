@@ -56,7 +56,7 @@ export default function StoreLayout({ children }: StoreLayoutProps) {
       {children}
 
       {/* Componentes flotantes */}
-      <CartButton onOpenCheckout={() => setIsCheckoutOpen(true)} />
+      <CartButton />
       <CartModal onOpenCheckout={() => setIsCheckoutOpen(true)} />
       <CheckoutForm
         isOpen={isCheckoutOpen}
